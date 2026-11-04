@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>设置 · ChatGPT 自动生图与下载助手</title>
+    <script src="src/settings-bootstrap.js"></script>
+    <link rel="stylesheet" href="src/ui-tokens.css" />
+    <link rel="stylesheet" href="options.css" />
+    <link rel="stylesheet" href="src/ui-components.css" />
+    <link rel="stylesheet" href="src/ui-workspace.css" />
+  </head>
+  <body class="cpq-settings-theme">
+    <main>
+      <header class="page-heading">
+        <span class="eyebrow">ChatGPT 自动生图与下载助手</span> <span id="extension-version" class="badge" aria-label="当前扩展版本">开发版</span>
+        <h1>下载与记录</h1>
+        <p>先选择保存位置，需要时再连接本机增强。</p>
+      </header>
+
+      <div id="settings-layout"><nav class="settings-nav" aria-label="设置目录"><a href="#browser-heading">浏览器下载</a><a href="#native-enhancement">本机增强</a></nav><div class="settings-content"><p id="current-download-mode" role="status" aria-live="polite">正在读取当前保存方式…</p>
+      <section class="connection-card browser-settings-card" aria-labelledby="browser-heading">
+        <div class="section-heading"><h2 id="browser-heading">浏览器下载</h2><span class="badge">直接可用</span></div>
+        <p class="section-description">保存到 Chrome 默认下载目录下，无需连接本机服务。</p>
+        <form id="browser-download-settings">
+          <label for="browser-folder">默认下载目录下的子目录</label>
+          <input id="browser-folder" value="ChatGPT 工作台/图库" maxlength="160" aria-describedby="browser-folder-help" />
+          <p id="browser-folder-help" class="hint">相对 Chrome 默认下载目录，使用 / 分隔。</p>
+          <button id="browser-download-save" class="cpq-primary" type="submit">保存</button>
+          <p id="browser-download-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <details id="native-enhancement" class="native-enhancement"><summary><span>本机增强服务 <small>自选目录 · 创作记录 · 下载通知</small></span><span id="native-state" class="badge">可选</span></summary>
+      <p class="hint native-help">需要任意 Windows 目录或下载通知时展开配置；浏览器下载可直接使用。</p>
+      <section class="connection-card" aria-labelledby="mcp-heading">
+        <div class="section-heading">
+          <h2 id="mcp-heading">本机连接</h2>
+          <span class="badge optional">可选</span>
+        </div>
+        <p class="section-description">
+          可选配套服务需要单独安装，用于指定 Windows 文件夹、创作记录和下载通知。基础生图与浏览器下载无需连接。
+        </p>
+        <div class="connection-state">
+          <span id="mcp-state-label" class="state-label">读取状态中</span>
+          <p id="mcp-status" role="status" aria-live="polite">
+            正在读取本机配对状态…
+          </p>
+        </div>
+        <details class="native-connection"><summary>配对连接 <span class="optional">进阶</span></summary><form id="mcp-connection">
+          <div class="address-row">
+            <span>服务地址</span
+            ><strong id="mcp-default-address">127.0.0.1:38121</strong>
+          </div>
+          <p id="mcp-next-step" class="hint">
+            选择本机服务为当前扩展生成的 JSON 配对文件。公开安装包不包含私有配对。
+          </p>
+          <div class="actions">
+            <button type="submit" id="mcp-connect">连接本机增强</button
+            ><button type="button" id="mcp-disconnect" class="secondary">
+              断开
+            </button>
+          </div>
+          <details class="advanced" open>
+            <summary>选择配对文件</summary>
+            <label for="mcp-pairing">选择本机配对文件</label
+            ><input
+              id="mcp-pairing"
+              type="file"
+              accept="application/json,.json"
+            />
+            <p class="hint">
+              选择 JSON 文件后，会使用该文件配对。配对密钥不会显示或导出。
+            </p>
+          </details>
+        </form></details>
+      </section>
+
+      <section class="connection-card" aria-labelledby="library-heading">
+        <div class="section-heading"><h2 id="library-heading">保存位置与通知</h2></div>
+        <p class="section-description">
+          此区域需要本机服务。原图保留在图库；会话、ZIP 等导出使用
+          Chrome 下载。
+        </p>
+        <form id="library-settings">
+          <fieldset class="settings-group"><legend>图片保存位置</legend>
+          <label for="download-mode">图片保存方式</label
+          ><select id="download-mode">
+            <option value="browser">Chrome 默认下载目录</option>
+            <option value="native">指定本机目录</option>
+          </select>
+          <div id="native-directory-field">
+            <label for="download-directory">图片下载目录</label
+            ><input
+              id="download-directory"
+              placeholder="D:\图片库"
+              maxlength="1000"
+              autocomplete="off"
+            />
+            <p class="hint">使用已存在的普通文件夹，不覆盖同名文件。</p>
+          </div>
+          <p id="browser-directory-field" class="hint">浏览器子目录使用上方设置。这里单独保存本机增强与通知配置。</p>
+          </fieldset>
+          <fieldset class="settings-group"><legend>下载完成通知</legend>
+          <label class="check-row"
+            ><input id="webhook-enabled" type="checkbox" />开启下载完成通知</label
+          >
+          <label for="webhook-url">通知地址（Webhook）</label
+          ><input
+            id="webhook-url"
+            type="password"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="4000"
+            placeholder="https://…"
+          />
+          <p id="webhook-configured" class="hint">
+            地址不会回填或进入工作区导出。
+          </p>
+          <label class="check-row"
+            ><input id="webhook-clear" type="checkbox" />清除已保存的 Webhook
+            地址</label
+          >
+          <label class="check-row"
+            ><input
+              id="webhook-descriptions"
+              type="checkbox"
+            />通知中附带提示词和图片描述</label
+          >
+          <p class="hint">
+            默认只通知文件名、校验值和完成时间，不发送图片、绝对路径或会话链接。通知失败不会影响下载结果。
+          </p>
+          </fieldset>
+          <button id="library-save" class="cpq-primary" type="submit">保存本机增强设置</button>
+        </form>
+        <div class="library-maintenance">
+          <h3>记录与维护</h3>
+          <p class="hint">创作记录（SQLite）</p>
+          <p id="sqlite-path" class="database-path">连接本机服务后显示</p>
+          <p id="library-counts">正在读取记录状态…</p>
+          <p id="notification-counts"></p>
+          <div class="actions">
+            <button id="library-refresh" type="button" class="secondary">
+              刷新状态</button
+            ><button id="library-reindex" type="button" class="secondary">
+              补录现有记录</button
+            ><button id="download-reconcile" type="button" class="secondary">
+              核对未完成下载</button
+            ><button id="notification-retry" type="button" class="secondary">
+              重试失败或未知通知
+            </button>
+          </div>
+          <p id="library-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+      </details>
+      </div></div>
+      <footer>图片保存在当前浏览器的本地图库。下载通知仅在启用后发送。</footer>
+    </main>
+    <script src="src/core.js"></script>
+    <script src="src/mcp-defaults.js"></script>
+    <script src="src/ui-controls.js"></script>
+    <script src="src/library-options.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

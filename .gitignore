@@ -1,0 +1,10 @@
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*pairing.json
+.local/
+node_modules/
+__pycache__/

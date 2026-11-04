@@ -1,0 +1,182 @@
+{
+  "name": "chatgpt-automation-workbench-3.9.3.zip",
+  "version": "3.9.3",
+  "bytes": 438399,
+  "sha256": "e6dd8dee733b17d61ff7e69cde520ccdd3c1c6a70d6ac6bd32f7866fa11d15cd",
+  "audit": {
+    "status": "PASS",
+    "version": "3.9.3",
+    "files": 33,
+    "scannedTextFiles": 28,
+    "machinePaths": 0,
+    "privateFiles": 0,
+    "runtimeNodeImports": 0
+  },
+  "files": [
+    {
+      "name": "INSTALL.md",
+      "bytes": 3981,
+      "sha256": "0fb4eb0add7234e10765cbd9fb088b5556c7a15250ad46669e1073679fc06627"
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 1094,
+      "sha256": "fc0cb92f00efb5bc461b4e7b7499d6ce47f8bb9f4643415cf598680c406d6ed5"
+    },
+    {
+      "name": "NOTICE.md",
+      "bytes": 1593,
+      "sha256": "21b596b52fb09dc4343606c629f589adc738042e9db70634a74200df51ffba50"
+    },
+    {
+      "name": "PRIVACY.md",
+      "bytes": 2568,
+      "sha256": "4b71e8b030eec7769f083c9d36719d3745c69b2f6c52593f7c778b08025b4444"
+    },
+    {
+      "name": "background.js",
+      "bytes": 26540,
+      "sha256": "9a7e1aa34da5b75b96ae260a8b733116ceaa81667bea35e095d30f4f46a65999"
+    },
+    {
+      "name": "content.css",
+      "bytes": 36464,
+      "sha256": "b9fba3e42d61ab521a59a5bd36b8521c25bada13765c298bf22e00ed3bdb6820"
+    },
+    {
+      "name": "content.js",
+      "bytes": 48825,
+      "sha256": "57d67d5ea3f02abfd95caa1e055469dabae015ea513b4b883cd5e2e9b9f6415f"
+    },
+    {
+      "name": "icon128.png",
+      "bytes": 11014,
+      "sha256": "c7e6fa7998725a8160099f085de0f0b66a5aceef9aa0977699c6971c0f0eac1e"
+    },
+    {
+      "name": "icon16.png",
+      "bytes": 684,
+      "sha256": "1942cc81b1b4db5f62250ae7e63c9235c76d85dd7c16a3d1d11c78e059af8220"
+    },
+    {
+      "name": "icon32.png",
+      "bytes": 1527,
+      "sha256": "f0ec0b48fd51c57c57e9908e5091c0db5537cb078230bfda5982a165088e7140"
+    },
+    {
+      "name": "icon48.png",
+      "bytes": 2577,
+      "sha256": "55d6634844c1db8a6bd3e217f4758ddb74104d1523eb6607a6d5947ac0809e9d"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 2055,
+      "sha256": "1dcf97448488985fd5ed619888788293c54689aacba2c1f49fbb8eb7d949e62d"
+    },
+    {
+      "name": "options.css",
+      "bytes": 11493,
+      "sha256": "f7cbfb25984c4a253ec8cd5f0f275fac570f86c327c984bb152e412f12d84a5d"
+    },
+    {
+      "name": "options.html",
+      "bytes": 8509,
+      "sha256": "27fb91f90e99cd4c173d7a006f16915c5f622a3ceefb7fcf1bfd2b8a0f8e41dc"
+    },
+    {
+      "name": "options.js",
+      "bytes": 6796,
+      "sha256": "def6a4e6405918327f6bbb8a2d4223148398ef30c50f90eef69f37af72ba1ed9"
+    },
+    {
+      "name": "src/archive.js",
+      "bytes": 11426,
+      "sha256": "c3ad7bb670df61b5f33d71f54b97c9c389f3bf53ce3bc6ea3f3af6de42184183"
+    },
+    {
+      "name": "src/batch.js",
+      "bytes": 3317,
+      "sha256": "42046c37fea0975f67d8b8a9350a9201e030f1f48472a317ef31639d78b32338"
+    },
+    {
+      "name": "src/capture.js",
+      "bytes": 13832,
+      "sha256": "ef4f643f825906c85ebf8f9138c33723352fd9738fe97f579299e0dcd0e2b609"
+    },
+    {
+      "name": "src/core.js",
+      "bytes": 16786,
+      "sha256": "e519ce9c9226881dc18aec342a0a47af3425f133c0f60c792b2c3df610a29db6"
+    },
+    {
+      "name": "src/gallery-view.js",
+      "bytes": 47223,
+      "sha256": "a9ecb2e832646345f469fe147fadfd3d47ead9595e52577767080faa50539a07"
+    },
+    {
+      "name": "src/library-options.js",
+      "bytes": 9246,
+      "sha256": "03ae96d96ed81f5a038a60343c9b8125b1397286449d3fe821ebffc0a8ab50ad"
+    },
+    {
+      "name": "src/mcp-background.js",
+      "bytes": 17161,
+      "sha256": "681175437c244ab29bac373326f5b1f4d57c9a5b886b3ec484220e44576c0cc0"
+    },
+    {
+      "name": "src/mcp-content.js",
+      "bytes": 3618,
+      "sha256": "dd536ea72269560c202de1ff70c94a7ddc3472f33c652dcf45efeee63cdb2797"
+    },
+    {
+      "name": "src/mcp-defaults.js",
+      "bytes": 835,
+      "sha256": "b61de2d52237d4f92c111d8dea31af68fc4b12c02dad6936328c4e07466d9379"
+    },
+    {
+      "name": "src/settings-bootstrap.js",
+      "bytes": 2599,
+      "sha256": "73b9ea4a7c9550ddeddd099dbef309055da133f3956ea871519049a7c03e77a1"
+    },
+    {
+      "name": "src/store.js",
+      "bytes": 9878,
+      "sha256": "18c129bbe4625bda8066c713744d160284c40f657a7550357e2e03fcb76a7b44"
+    },
+    {
+      "name": "src/toolkit.js",
+      "bytes": 38145,
+      "sha256": "d10c937c75c485aac7a55fb389a72bfdbb1642369dd4854bdb9a5117c4773367"
+    },
+    {
+      "name": "src/ui-components.css",
+      "bytes": 22672,
+      "sha256": "6dfd68bcfb9d24e5f5e3929ed8679a3dc5969396bef90c9f054fcf9070a547cf"
+    },
+    {
+      "name": "src/ui-controls.js",
+      "bytes": 2869,
+      "sha256": "67036f8e670c9883b3fc0f6df325c0de976914f1301b211958a9d0fb56fcf4ee"
+    },
+    {
+      "name": "src/ui-layout.css",
+      "bytes": 15150,
+      "sha256": "2e8ba8dfc0628e5233fb189bcce1b84475574c8241bc58f0e3f99a17182f772e"
+    },
+    {
+      "name": "src/ui-tokens.css",
+      "bytes": 913,
+      "sha256": "a3822cb9cd69a6295412a5f8673344e63e585e085c94799b3858d47359177328"
+    },
+    {
+      "name": "src/ui-workspace.css",
+      "bytes": 33814,
+      "sha256": "c505f9c333f32fd2c6a100deb4fdc2241a9c90e843b0a96bd486bd476faaa569"
+    },
+    {
+      "name": "src/workbench-view.js",
+      "bytes": 19721,
+      "sha256": "5ca3b810ae70ca796c1d2403a5d2d9ee7c00e19ca9845609e9ca045c4f9d89c8"
+    }
+  ]
+}

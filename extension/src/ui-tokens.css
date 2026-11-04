@@ -1,0 +1,28 @@
+/* Generated from docs/design/settings-workspace-v3/ui.ir.json; edit the IR then rebuild. */
+#cpq-root, .cpq-settings-theme {
+  --cpq-ir-canvas: #F3F6F4;
+  --cpq-ir-surface: #FFFFFF;
+  --cpq-ir-surface-muted: #EDF3EF;
+  --cpq-ir-ink: #1D302A;
+  --cpq-ir-muted: #596D64;
+  --cpq-ir-accent: #176B55;
+  --cpq-ir-accent-hover: #125641;
+  --cpq-ir-on-accent: #FFFFFF;
+  --cpq-ir-border: #D8E2DC;
+  --cpq-ir-control-border: #7B9084;
+  --cpq-ir-focus: #176B55;
+  --cpq-ir-warning: #8A570D;
+  --cpq-ir-warning-surface: #FFF2D8;
+  --cpq-ir-panel-width: 400px;
+  --cpq-ir-gutter: 16px;
+  --cpq-ir-space-small: 8px;
+  --cpq-ir-space-medium: 12px;
+  --cpq-ir-space-large: 16px;
+  --cpq-ir-radius: 6px;
+  --cpq-ir-control-height: 44px;
+  --cpq-ir-header-height: 56px;
+  --cpq-ir-font: 'Segoe UI','Microsoft YaHei',system-ui,sans-serif;
+  --cpq-ir-body-size: 14px;
+  --cpq-ir-caption-size: 12px;
+  --cpq-ir-title-size: 18px;
+}

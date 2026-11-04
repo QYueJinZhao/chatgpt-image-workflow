@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "116",
+  "name": "ChatGPT 自动生图与下载助手",
+  "short_name": "生图下载助手",
+  "version": "3.9.3",
+  "description": "为 ChatGPT 提供提示词队列、自动生图与下载、参考图和图片管理；兼容 Gemini。基础功能无需本机服务，可选连接本机目录、SQLite 与下载通知。",
+  "permissions": [
+    "storage",
+    "downloads",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://www.chatgpt.com/*",
+    "https://gemini.google.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "options.html"
+      ],
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://www.chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; frame-ancestors https://chatgpt.com https://www.chatgpt.com https://gemini.google.com;"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://www.chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": [
+        "src/core.js",
+        "src/archive.js",
+        "src/capture.js",
+        "src/batch.js",
+        "src/ui-controls.js",
+        "src/gallery-view.js",
+        "src/toolkit.js",
+        "src/workbench-view.js",
+        "src/mcp-content.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css",
+        "src/ui-tokens.css",
+        "src/ui-layout.css",
+        "src/ui-components.css",
+        "src/ui-workspace.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "打开 ChatGPT 自动生图与下载助手"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
