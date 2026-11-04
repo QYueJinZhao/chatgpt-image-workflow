@@ -1,12 +1,14 @@
 # ChatGPT 自动生图与下载助手
 
-面向 ChatGPT 网页的提示词队列、自动生图、下载和图片管理扩展，也兼容 Gemini。当前版本 **3.9.3**。
+面向 ChatGPT 网页的提示词队列、自动生图、下载和图片管理扩展，也兼容 Gemini。当前版本 **3.9.4**。
+
+3.9.4 修复新版 ChatGPT 网页的参考图上传回执识别；保留已有附件、上传中及发送前确认保护。
 
 这是第三方工具，与 OpenAI、Google 及其站点无隶属关系。生成能力、账号权限、额度和验证码由相应站点提供。
 
 ## 安装
 
-1. 下载本仓库 releases 目录中的 `chatgpt-automation-workbench-3.9.3.zip` 并完整解压。
+1. 下载本仓库 releases 目录中的 `chatgpt-automation-workbench-3.9.4.zip` 并完整解压。
 2. 打开 Chrome 扩展管理页，开启开发者模式，选择“加载已解压的扩展程序”，选中解压后的目录。
 3. 打开或刷新 ChatGPT / Gemini，点击扩展图标展开工作台。
 
@@ -28,6 +30,12 @@
 
 [隐私说明](PRIVACY.md) · [完整使用说明](extension/INSTALL.md) · [来源与许可](NOTICE.md)
 
-发布包 SHA-256：`e6dd8dee733b17d61ff7e69cde520ccdd3c1c6a70d6ac6bd32f7866fa11d15cd`。逐文件指纹见 release-manifest.json，可用 `python tools/verify_release.py` 校验 ZIP 与源码。
+发布包 SHA-256：`b456d53b998b1c9d68564db13493b2f01732c89bd584cdf0ee86e91f330794ef`。逐文件指纹见 release-manifest.json，可用 `python tools/verify_release.py` 校验 ZIP 与源码。
 
 公开源码源于 MIT 项目 [aleixmedina9-gif/chatgpt-prompt-queue](https://github.com/aleixmedina9-gif/chatgpt-prompt-queue)，保留原 LICENSE 和来源声明。
+
+## 开发验证
+
+浏览器扩展的基础功能不依赖 Python。开发者可安装 `tests/requirements.txt` 与 Playwright Chromium，运行 `python -m unittest discover -s tests -p 'test_*.py' -v`。这些离线 DOM 用例不会连接真实账号或发送生成任务。
+
+发布前运行 `python tools/build_release.py` 生成新的 ZIP 和文件清单，再运行 `python tools/verify_release.py`；已有同名 ZIP 会被拒绝覆盖。

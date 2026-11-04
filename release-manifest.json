@@ -1,11 +1,12 @@
 {
-  "name": "chatgpt-automation-workbench-3.9.3.zip",
-  "version": "3.9.3",
-  "bytes": 438399,
-  "sha256": "e6dd8dee733b17d61ff7e69cde520ccdd3c1c6a70d6ac6bd32f7866fa11d15cd",
+  "name": "chatgpt-automation-workbench-3.9.4.zip",
+  "version": "3.9.4",
+  "bytes": 134512,
+  "sha256": "b456d53b998b1c9d68564db13493b2f01732c89bd584cdf0ee86e91f330794ef",
   "audit": {
     "status": "PASS",
-    "version": "3.9.3",
+    "scope": "static release inputs only",
+    "version": "3.9.4",
     "files": 33,
     "scannedTextFiles": 28,
     "machinePaths": 0,
@@ -13,26 +14,6 @@
     "runtimeNodeImports": 0
   },
   "files": [
-    {
-      "name": "INSTALL.md",
-      "bytes": 3981,
-      "sha256": "0fb4eb0add7234e10765cbd9fb088b5556c7a15250ad46669e1073679fc06627"
-    },
-    {
-      "name": "LICENSE",
-      "bytes": 1094,
-      "sha256": "fc0cb92f00efb5bc461b4e7b7499d6ce47f8bb9f4643415cf598680c406d6ed5"
-    },
-    {
-      "name": "NOTICE.md",
-      "bytes": 1593,
-      "sha256": "21b596b52fb09dc4343606c629f589adc738042e9db70634a74200df51ffba50"
-    },
-    {
-      "name": "PRIVACY.md",
-      "bytes": 2568,
-      "sha256": "4b71e8b030eec7769f083c9d36719d3745c69b2f6c52593f7c778b08025b4444"
-    },
     {
       "name": "background.js",
       "bytes": 26540,
@@ -69,9 +50,24 @@
       "sha256": "55d6634844c1db8a6bd3e217f4758ddb74104d1523eb6607a6d5947ac0809e9d"
     },
     {
+      "name": "INSTALL.md",
+      "bytes": 3981,
+      "sha256": "0fb4eb0add7234e10765cbd9fb088b5556c7a15250ad46669e1073679fc06627"
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 1094,
+      "sha256": "fc0cb92f00efb5bc461b4e7b7499d6ce47f8bb9f4643415cf598680c406d6ed5"
+    },
+    {
       "name": "manifest.json",
       "bytes": 2055,
-      "sha256": "1dcf97448488985fd5ed619888788293c54689aacba2c1f49fbb8eb7d949e62d"
+      "sha256": "2785575cf5de5520cb63258e36339af609af9a356ec635344f8826ba0df80003"
+    },
+    {
+      "name": "NOTICE.md",
+      "bytes": 1593,
+      "sha256": "21b596b52fb09dc4343606c629f589adc738042e9db70634a74200df51ffba50"
     },
     {
       "name": "options.css",
@@ -89,6 +85,11 @@
       "sha256": "def6a4e6405918327f6bbb8a2d4223148398ef30c50f90eef69f37af72ba1ed9"
     },
     {
+      "name": "PRIVACY.md",
+      "bytes": 2568,
+      "sha256": "4b71e8b030eec7769f083c9d36719d3745c69b2f6c52593f7c778b08025b4444"
+    },
+    {
       "name": "src/archive.js",
       "bytes": 11426,
       "sha256": "c3ad7bb670df61b5f33d71f54b97c9c389f3bf53ce3bc6ea3f3af6de42184183"
@@ -100,8 +101,8 @@
     },
     {
       "name": "src/capture.js",
-      "bytes": 13832,
-      "sha256": "ef4f643f825906c85ebf8f9138c33723352fd9738fe97f579299e0dcd0e2b609"
+      "bytes": 14896,
+      "sha256": "45b7c0985419393f40a6f1715b83f034a7654cf39840378f6c550d88836696f3"
     },
     {
       "name": "src/core.js",

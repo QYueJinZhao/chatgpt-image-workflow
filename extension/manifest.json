@@ -3,7 +3,7 @@
   "minimum_chrome_version": "116",
   "name": "ChatGPT 自动生图与下载助手",
   "short_name": "生图下载助手",
-  "version": "3.9.3",
+  "version": "3.9.4",
   "description": "为 ChatGPT 提供提示词队列、自动生图与下载、参考图和图片管理；兼容 Gemini。基础功能无需本机服务，可选连接本机目录、SQLite 与下载通知。",
   "permissions": [
     "storage",

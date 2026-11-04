@@ -264,9 +264,46 @@
     };
   }
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const referencePreviewSelector =
+    '[data-testid*="attachment"],button[aria-label*="Remove file"],button[aria-label*="移除文件"],button[aria-label*="Remove attachment"],button[aria-label*="移除附件"],button[aria-label*="移除图片"],button[aria-label*="Remove image"],.composer-attachment-surface button[aria-label^="移除“"][aria-label$="”"]';
+  function visibleReferenceNode(node) {
+    if (node.closest('#cpq-root,[hidden],[aria-hidden="true"],[inert]'))
+      return false;
+    const style = node.ownerDocument.defaultView?.getComputedStyle(node);
+    return (
+      node.getClientRects().length > 0 &&
+      style?.visibility !== "hidden" &&
+      style?.visibility !== "collapse"
+    );
+  }
+  function referencePreviews(form) {
+    const nodes = [...form.querySelectorAll(referencePreviewSelector)].filter(
+      visibleReferenceNode,
+    );
+    // A legacy list can contain several independent remove buttons. Ignore
+    // ancestor markers so the list is not counted as an attachment itself.
+    const receipts = nodes.filter((node) =>
+      !nodes.some((child) => child !== node && node.contains(child)),
+    );
+    return [...new Set(receipts.map((node) =>
+      node.closest('.composer-attachment-surface') || node,
+    ))];
+  }
+  function referencesUploading(form) {
+    return [
+      ...form.querySelectorAll(
+        '[role="progressbar"],[data-testid*="uploading"],[aria-busy="true"],.composer-attachment-surface .animate-spin',
+      ),
+    ].some(visibleReferenceNode);
+  }
   async function attachReferences(d, assets, check = () => {}) {
     if (!assets.length) return;
-    const inputs = [...d.querySelectorAll("input[type=file]")].filter(
+    const box = composer(d);
+    const inputArea =
+      (provider(d) === "gemini" &&
+        box?.closest("input-area-v2,input-area,.input-area-container")) ||
+      box?.closest("form");
+    const inputs = [...(inputArea || d).querySelectorAll("input[type=file]")].filter(
       (n) => !n.closest("#cpq-root") && !n.closest("aside"),
     );
     const compatible = inputs.filter(
@@ -282,16 +319,11 @@
       compatible[0];
     if (!input) throw new Error("找不到附件上传控件，请先展开附件功能");
     const form =
-      (provider(d) === "gemini" &&
-        composer(d)?.closest(
-          "input-area-v2,input-area,.input-area-container",
-        )) ||
+      inputArea ||
       input.closest("form") ||
       d.querySelector("#prompt-textarea")?.closest("form") ||
       d.body;
-    const existing = form.querySelectorAll(
-      '[data-testid*="attachment"],button[aria-label*="Remove file"],button[aria-label*="移除文件"],button[aria-label*="Remove attachment"],button[aria-label*="移除附件"],button[aria-label*="移除图片"],button[aria-label*="Remove image"]',
-    ).length;
+    const existing = referencePreviews(form).length;
     if (existing)
       throw new Error("输入区已有附件，请先核对并清空后再运行参考图任务");
     const dt = new DataTransfer();
@@ -308,15 +340,11 @@
     const end = Date.now() + 60000;
     while (Date.now() < end) {
       check();
-      const previews = form.querySelectorAll(
-        '[data-testid*="attachment"],button[aria-label*="Remove file"],button[aria-label*="移除文件"],button[aria-label*="Remove attachment"],button[aria-label*="移除附件"],button[aria-label*="移除图片"],button[aria-label*="Remove image"]',
-      );
-      const loading = form.querySelector(
-        '[role="progressbar"],[data-testid*="uploading"]',
-      );
-      if (previews.length >= assets.length && !loading) {
+      if (referencePreviews(form).length >= assets.length && !referencesUploading(form)) {
         await sleep(500);
-        return;
+        check();
+        if (referencePreviews(form).length >= assets.length && !referencesUploading(form))
+          return;
       }
       await sleep(250);
     }
