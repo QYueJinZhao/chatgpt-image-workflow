@@ -266,19 +266,15 @@
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const referencePreviewSelector =
     '[data-testid*="attachment"],button[aria-label*="Remove file"],button[aria-label*="移除文件"],button[aria-label*="Remove attachment"],button[aria-label*="移除附件"],button[aria-label*="移除图片"],button[aria-label*="Remove image"],.composer-attachment-surface button[aria-label^="移除“"][aria-label$="”"]';
-  function visibleReferenceNode(node) {
-    if (node.closest('#cpq-root,[hidden],[aria-hidden="true"],[inert]'))
-      return false;
-    const style = node.ownerDocument.defaultView?.getComputedStyle(node);
+  function visibleProviderControl(node) {
     return (
-      node.getClientRects().length > 0 &&
-      style?.visibility !== "hidden" &&
-      style?.visibility !== "collapse"
+      visibleGeminiNode(node) &&
+      [...node.getClientRects()].some((rect) => rect.width > 0 && rect.height > 0)
     );
   }
   function referencePreviews(form) {
     const nodes = [...form.querySelectorAll(referencePreviewSelector)].filter(
-      visibleReferenceNode,
+      visibleProviderControl,
     );
     // A legacy list can contain several independent remove buttons. Ignore
     // ancestor markers so the list is not counted as an attachment itself.
@@ -294,7 +290,8 @@
       ...form.querySelectorAll(
         '[role="progressbar"],[data-testid*="uploading"],[aria-busy="true"],.composer-attachment-surface .animate-spin',
       ),
-    ].some(visibleReferenceNode);
+    // Semantic loading markers may have no layout box (e.g. an empty spinner).
+    ].some(visibleGeminiNode);
   }
   async function attachReferences(d, assets, check = () => {}) {
     if (!assets.length) return;
@@ -357,7 +354,7 @@
           ? 'rich-textarea [contenteditable="true"][role="textbox"],.ql-editor[contenteditable="true"][role="textbox"]'
           : '#prompt-textarea,textarea[data-id],textarea,[contenteditable="true"][role="textbox"]',
       ),
-    ].find((n) => !n.closest("#cpq-root") && n.getClientRects().length);
+    ].find(visibleProviderControl);
   }
   function setComposer(n, text) {
     n.focus();
@@ -373,8 +370,9 @@
     n.dispatchEvent(new Event("change", { bubbles: true }));
   }
   function sendButton(d) {
+    const inputForm = provider(d) === "chatgpt" ? composer(d)?.closest("form") : null;
     const candidates = [
-      ...d.querySelectorAll(
+      ...(inputForm || d).querySelectorAll(
         provider(d) === "gemini"
           ? 'button.send-button,button[aria-label="Send message"],button[aria-label="发送消息"],button[aria-label="发送"],button[aria-label="Submit"],button[aria-label="提交"]'
           : 'button[data-testid="send-button"],button[aria-label="Send prompt"],button[aria-label="发送提示"],button[aria-label="发送消息"],button[aria-label="发送"]',
@@ -384,9 +382,20 @@
         !n.closest("#cpq-root") &&
         !n.disabled &&
         n.getAttribute("aria-disabled") !== "true" &&
-        n.getClientRects().length,
+        visibleProviderControl(n),
     );
     return candidates.length === 1 ? candidates[0] : undefined;
+  }
+  async function waitForSendButton(d, check = () => {}) {
+    const until = Date.now() + 30000;
+    while (Date.now() < until) {
+      check();
+      const button = sendButton(d);
+      if (button) return button;
+      await sleep(100);
+    }
+    check();
+    return undefined;
   }
   return {
     domSchema: "role-headings-20261021",
@@ -401,6 +410,7 @@
     composer,
     setComposer,
     sendButton,
+    waitForSendButton,
     messages,
   };
 });

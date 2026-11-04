@@ -1,6 +1,8 @@
 # ChatGPT 自动生图与下载助手
 
-面向 ChatGPT 网页的提示词队列、自动生图、下载和图片管理扩展，也兼容 Gemini。当前版本 **3.9.4**。
+面向 ChatGPT 网页的提示词队列、自动生图、下载和图片管理扩展，也兼容 Gemini。当前版本 **3.9.5**。
+
+3.9.5 在附件处理期间等待发送按钮就绪，排除零尺寸的备用输入控件，并限定当前 ChatGPT 输入表单；等待过程仍可暂停，不绕过发送校验。
 
 3.9.4 修复新版 ChatGPT 网页的参考图上传回执识别；保留已有附件、上传中及发送前确认保护。
 
@@ -8,7 +10,7 @@
 
 ## 安装
 
-1. 下载本仓库 releases 目录中的 `chatgpt-automation-workbench-3.9.4.zip` 并完整解压。
+1. 下载本仓库 releases 目录中的 `chatgpt-automation-workbench-3.9.5.zip` 并完整解压。
 2. 打开 Chrome 扩展管理页，开启开发者模式，选择“加载已解压的扩展程序”，选中解压后的目录。
 3. 打开或刷新 ChatGPT / Gemini，点击扩展图标展开工作台。
 
@@ -30,7 +32,7 @@
 
 [隐私说明](PRIVACY.md) · [完整使用说明](extension/INSTALL.md) · [来源与许可](NOTICE.md)
 
-发布包 SHA-256：`b456d53b998b1c9d68564db13493b2f01732c89bd584cdf0ee86e91f330794ef`。逐文件指纹见 release-manifest.json，可用 `python tools/verify_release.py` 校验 ZIP 与源码。
+发布包 SHA-256：`9617dadf5e1a9fcd017e732fa76c665324b7c43640b271dce32d997a63eeedda`。逐文件指纹见 release-manifest.json，可用 `python tools/verify_release.py` 校验 ZIP 与源码。
 
 公开源码源于 MIT 项目 [aleixmedina9-gif/chatgpt-prompt-queue](https://github.com/aleixmedina9-gif/chatgpt-prompt-queue)，保留原 LICENSE 和来源声明。
 

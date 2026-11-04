@@ -169,6 +169,58 @@ class ReferenceReceiptTests(unittest.TestCase):
         self.page.clock.run_for(2000)
         self.assertEqual(self.result()["result"], {"ready": True})
 
+    def test_send_waits_for_delayed_upload_readiness(self):
+        self.page.evaluate("""() => {
+          const button=document.createElement('button');button.type='button';
+          button.setAttribute('aria-label','发送');button.disabled=true;
+          document.querySelector('#composer').append(button);
+          setTimeout(()=>{button.disabled=false;},8000);
+          window.sendResult={pending:true};
+          CPQCapture.waitForSendButton(document).then(button=>{window.sendResult={ready:!!button};});
+        }""")
+        self.page.clock.run_for(10000)
+        self.assertEqual(self.page.evaluate("window.sendResult"), {"ready": True})
+
+    def test_zero_size_composer_clone_is_ignored(self):
+        self.page.evaluate("""() => {
+          const clone=document.createElement('div');clone.id='invisible-clone';
+          clone.setAttribute('contenteditable','true');clone.setAttribute('role','textbox');
+          clone.style.cssText='position:absolute;width:0;height:0;padding:0;border:0;overflow:hidden';
+          document.body.prepend(clone);
+        }""")
+        self.assertNotEqual(self.page.evaluate("CPQCapture.composer(document)?.id"), "invisible-clone")
+
+    def test_zero_size_send_clone_is_ignored(self):
+        self.page.evaluate("""() => {
+          const clone=document.createElement('button');clone.type='button';
+          clone.setAttribute('aria-label','发送');
+          clone.style.cssText='position:absolute;width:0;height:0;padding:0;border:0;overflow:hidden';
+          const real=document.createElement('button');real.type='button';real.id='real-send';
+          real.setAttribute('aria-label','发送');real.style.cssText='width:40px;height:36px';
+          document.body.prepend(clone);document.querySelector('#composer').append(real);
+        }""")
+        self.assertEqual(self.page.evaluate("CPQCapture.sendButton(document)?.id"), "real-send")
+
+    def test_send_wait_remains_cancellable(self):
+        self.page.evaluate("""() => {
+          window.sendResult={pending:true};let cancelled=false;
+          setTimeout(()=>{cancelled=true;},200);
+          CPQCapture.waitForSendButton(document,()=>{if(cancelled)throw Error('cancelled');})
+            .then(()=>{window.sendResult={ready:true};})
+            .catch(error=>{window.sendResult={error:error.message};});
+        }""")
+        self.page.clock.run_for(500)
+        self.assertEqual(self.page.evaluate("window.sendResult"), {"error": "cancelled"})
+
+    def test_send_never_uses_another_form(self):
+        self.page.evaluate("""() => {
+          const foreign=document.createElement('button');foreign.type='button';
+          foreign.setAttribute('aria-label','发送');document.querySelector('#unrelated').append(foreign);
+          const real=document.createElement('button');real.type='button';real.disabled=true;
+          real.setAttribute('aria-label','发送');document.querySelector('#composer').append(real);
+        }""")
+        self.assertIsNone(self.page.evaluate("CPQCapture.sendButton(document) ? 'wrong-button' : null"))
+
 
 if __name__ == "__main__":
     unittest.main()

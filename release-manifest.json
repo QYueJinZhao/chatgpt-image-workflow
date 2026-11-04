@@ -1,12 +1,12 @@
 {
-  "name": "chatgpt-automation-workbench-3.9.4.zip",
-  "version": "3.9.4",
-  "bytes": 134512,
-  "sha256": "b456d53b998b1c9d68564db13493b2f01732c89bd584cdf0ee86e91f330794ef",
+  "name": "chatgpt-automation-workbench-3.9.5.zip",
+  "version": "3.9.5",
+  "bytes": 134609,
+  "sha256": "9617dadf5e1a9fcd017e732fa76c665324b7c43640b271dce32d997a63eeedda",
   "audit": {
     "status": "PASS",
     "scope": "static release inputs only",
-    "version": "3.9.4",
+    "version": "3.9.5",
     "files": 33,
     "scannedTextFiles": 28,
     "machinePaths": 0,
@@ -26,8 +26,8 @@
     },
     {
       "name": "content.js",
-      "bytes": 48825,
-      "sha256": "57d67d5ea3f02abfd95caa1e055469dabae015ea513b4b883cd5e2e9b9f6415f"
+      "bytes": 48699,
+      "sha256": "de2907643443d324ca386bff15c42e12fc004e725c8b183bbe31a43004069ab0"
     },
     {
       "name": "icon128.png",
@@ -62,7 +62,7 @@
     {
       "name": "manifest.json",
       "bytes": 2055,
-      "sha256": "2785575cf5de5520cb63258e36339af609af9a356ec635344f8826ba0df80003"
+      "sha256": "869d8023e617f7630880b9bb343f9671d1dd44092873cdb0f6a9b21187f72a43"
     },
     {
       "name": "NOTICE.md",
@@ -101,8 +101,8 @@
     },
     {
       "name": "src/capture.js",
-      "bytes": 14896,
-      "sha256": "45b7c0985419393f40a6f1715b83f034a7654cf39840378f6c550d88836696f3"
+      "bytes": 15175,
+      "sha256": "da012cc7f99d5c56605c5db2aad7217b0f8b2e186b78143cd9be93f90f7a53da"
     },
     {
       "name": "src/core.js",

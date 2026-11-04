@@ -560,13 +560,7 @@
           box,
           C.buildPrompt(item.prompt, state.settings, item.kind),
         );
-        let button;
-        for (let n = 0; n < 30; n++) {
-          check(token);
-          button = P.sendButton(document);
-          if (button) break;
-          await delay(100, token);
-        }
+        const button = await P.waitForSendButton(document, () => check(token));
         if (!button) throw new Error("发送按钮不可用，任务尚未提交");
         item.stage = "submitting";
         item.submittedAt = Date.now();
